@@ -41,8 +41,17 @@ Java enum generator from database dictionary
                                 {schema_name}
                             </schema>
                             <table>
-                                {table_name}}
+                                {table_name}
                             </table>
+                            --not required
+                            <fieldsRules>
+                                <type>
+                                    include/exclude
+                                </type>
+                                <fields>
+                                    {table fields, separated by comma. PK field always include, ignored this property}
+                                </fields>
+                            </fieldsRules>
                             --not required
                             <enumName>
                                 {Custom name for enum class in generated java class instead table name.}

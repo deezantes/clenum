@@ -9,6 +9,8 @@ public class Table {
     private String table;
     @Parameter(property = "enumName")
     private String enumName;// Custom name for enum class in generated java class instead table name.
+    @Parameter(property = "fieldsRules")
+    private FieldsRules fieldsRules;
 
     public String getSchema() {
         return schema;
@@ -32,5 +34,13 @@ public class Table {
 
     public void setEnumName(String enumName) {
         this.enumName = enumName;
+    }
+
+    public FieldsRules getFieldsRules() {
+        return fieldsRules;
+    }
+
+    public void setFieldsRules(FieldsRules fieldsRules) {
+        this.fieldsRules = fieldsRules;
     }
 }

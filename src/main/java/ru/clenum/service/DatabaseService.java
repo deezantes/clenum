@@ -235,6 +235,33 @@ public class DatabaseService {
                     if (!columnInfoList.get(i).getColumnName().equals(pkName)
                             && !columnInfoList.get(i).getColumnName().equals(importSettings.getEnumFieldName())) {
 
+                        if (table.getFieldsRules() != null) {
+                            FieldsRules fieldsRules = table.getFieldsRules();
+                            String[] fields = fieldsRules.getFields().split(",");
+                            boolean contain = false;
+                            if (FieldsRules.INCLUDE.equalsIgnoreCase(fieldsRules.getType())) {
+                                for (String field : fields) {
+                                    field = field.trim();
+                                    if (field.equalsIgnoreCase(columnInfoList.get(i).getColumnName())) {
+                                        contain = true;
+                                    }
+                                }
+                                if (!contain) {
+                                    continue;
+                                }
+                            } else if (FieldsRules.EXCLUDE.equalsIgnoreCase(fieldsRules.getType())) {
+                                for (String field : fields) {
+                                    field = field.trim();
+                                    if (field.equalsIgnoreCase(columnInfoList.get(i).getColumnName())) {
+                                        contain = true;
+                                    }
+                                }
+                                if (contain) {
+                                    continue;
+                                }
+                            }
+                        }
+
                         String fieldName = Utils.removeUnderscore(columnInfoList.get(i).getColumnName());
 
                         if (Character.isDigit(fieldName.charAt(0))) {
